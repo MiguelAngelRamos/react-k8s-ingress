@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-app # Nombre del Deployment 
+  namespace: react-app # Namespace donde se desplegará la aplicación, debe existir previamente
+spec:
+  replicas: 1 # Número de réplicas que deseas ejecutar
+  selector:
+    matchLabels:
+      app: react-app # Selector para identificar los pods (buscar los pods y vamos utilizar este label)
+  template:
+    metadata:
+      labels:
+        app: react-app # Etiqueta que se asignará a los pods creados por este Deployment
+    spec:
+      containers: # Contenedores que se ejecutarán en los pods
+      - name: react-k8 # Nombre del contenedor
+        image: mramoscli/react-k8:latest # Imagen del contenedor que se ejecutará, tomada del Docker Hub
+        ports:
+          - containerPort: 80 # Puerto en el que el contenedor escuchará las solicitudes
+        resources: # Recursos asignados al contenedor
+          requests:
+            memory: "128Mi" # Memoria solicitada
+            cpu: "100m" # CPU solicitado
+          limits:
+            memory: "256Mi" # Memoria máxima permitida
+            cpu: "250m" # CPU máximo permitido

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: react-app # Nombre del Servicio
+  namespace: react-app # Namespace donde se desplegará el servicio, debe existir previamente
+spec:
+  type: ClusterIP
+  selector:
+    app: react-app # Selector para identificar los pods que este servicio expondrá
+  ports:
+    - protocol: TCP # Protocolo utilizado por el servicio
+      port: 80 # Puerto del servicio
+      targetPort: 80 # Puerto al que se redirigirán las solicitudes en los pods
+      # nodePort: 30000 # Puerto en el nodo donde se expondrá el servicio (opcional, si no se especifica, Kubernetes asignará uno automáticamente)
